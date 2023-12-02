@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/foundation/constants/asset_constants.dart';
+import 'package:weather_app/view/route/app_router.dart';
 import 'package:weather_app/viewmodel/location_viewmodel.dart';
 
 @RoutePage()
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
         await context.read<LocationViewModel>().setLocation();
-        // context.router.push()
+        await context.router.replace(const HomeRoute());
       },
     );
   }

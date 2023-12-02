@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/models/status.dart';
 import 'package:weather_app/core/models/t_state.dart';
 import 'package:weather_app/model/dtos/weather_request_dto.dart';
+import 'package:weather_app/model/models/current_weather_model.dart';
 import 'package:weather_app/model/models/weather_model.dart';
 import 'package:weather_app/model/repositories/weather_repository.dart';
 
@@ -21,9 +22,10 @@ class WeatherViewModel extends ChangeNotifier {
   }
   //----------------------------------------------------------------------
 
-  Future<void> getWeather() async {
-    //TODO: Change latitude and longitude
-    final dto = WeatherRequestDto(latitude: 52.52, longitude: 13.419998);
+  CurrentWeatherModel? get currentWeather => state.data?.current;
+
+  Future<void> getWeather(double latitude, double longitude) async {
+    final dto = WeatherRequestDto(latitude: latitude, longitude: longitude);
     final eitherResponse = await _weatherRepository.getWeather(dto);
 
     eitherResponse.fold(
