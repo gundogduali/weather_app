@@ -8,12 +8,15 @@ import 'package:weather_app/model/models/hourly_weather_model.dart';
 part 'weather_model.g.dart';
 
 @JsonSerializable()
-class WeatherModel extends Equatable{
-  WeatherModel({
+class WeatherModel extends Equatable {
+  const WeatherModel({
     required this.current,
     required this.hourly,
     required this.daily,
   });
+
+  factory WeatherModel.fromJson(Map<String, dynamic> json) =>
+      _$WeatherModelFromJson(json);
 
   final CurrentWeatherModel current;
   @JsonKey(fromJson: _hourlyFromJson)
@@ -53,7 +56,7 @@ class WeatherModel extends Equatable{
     }
     return returnModels;
   }
-  
+
   @override
-  List<Object?> get props => [current,hourly,daily];
+  List<Object?> get props => [current, hourly, daily];
 }
