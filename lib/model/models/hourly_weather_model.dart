@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class HourlyWeatherModel  extends Equatable{
-  HourlyWeatherModel({
+class HourlyWeatherModel extends Equatable {
+  const HourlyWeatherModel({
     required this.time,
     required this.temperature,
     required this.weatherCode,
@@ -23,7 +23,7 @@ class HourlyWeatherModel  extends Equatable{
   }
 
   String toJson() => json.encode(toMap());
-  
+
   @override
-  List<Object?> get props => [time,temperature,weatherCode];
+  List<Object?> get props => [time, temperature, weatherCode];
 }

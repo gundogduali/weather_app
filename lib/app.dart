@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/di/di.dart';
+import 'package:weather_app/view/route/app_router.dart';
+import 'package:weather_app/viewmodel/location_viewmodel.dart';
 import 'package:weather_app/viewmodel/weather_viewmodel.dart';
 
 class App extends StatelessWidget {
@@ -13,28 +15,14 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<WeatherViewModel>(
           create: (context) => getIt<WeatherViewModel>(),
         ),
-      ],
-      child: MaterialApp(
-        title: 'Material App',
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Material App Bar'),
-          ),
-          body: Center(
-            child: Builder(
-              builder: (context) {
-                return ElevatedButton(
-                  onPressed: () async {
-                    await context.read<WeatherViewModel>().getWeather();
-                  },
-                  child: Text(
-                    context.watch<WeatherViewModel>().state.status.toString(),
-                  ),
-                );
-              },
-            ),
-          ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<LocationViewModel>(),
         ),
+      ],
+      child: MaterialApp.router(
+        title: 'Weather App',
+        debugShowCheckedModeBanner: false,
+        routerConfig: getIt<AppRouter>().config(),
       ),
     );
   }
