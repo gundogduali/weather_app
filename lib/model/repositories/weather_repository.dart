@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:weather_app/core/exceptions/failures.dart';
 import 'package:weather_app/model/data_sources/weather_remote_data_source.dart';
@@ -18,7 +20,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
   ) async {
     try {
       return Right(await _weatherRemoteDataSource.getWeather(dto));
-    } catch (e) {
+    } catch (e, s) {
+      log('Error: $e');
+      log('StackTrace: $s');
       //TODO: Handle if(e is DioError) or (e is ServerException)
       return Left(ServerFailure(message: e.toString()));
     }

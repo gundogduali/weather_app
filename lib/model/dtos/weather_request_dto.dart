@@ -4,17 +4,17 @@ class WeatherRequestDto {
     required this.longitude,
   }) {
     //TODO: Change later from settings ui etc...
-    _current = 'temperature_2m,relative_humidity_2m,wind_speed_10m';
-    _hourly = 'temperature_2m,weather_code';
-    _daily = 'weather_code';
+    _current = ['temperature_2m', 'relative_humidity_2m', 'wind_speed_10m'];
+    _hourly = ['temperature_2m', 'weather_code'];
+    _daily = ['weather_code'];
     _timezone = 'GMT';
   }
 
   final double latitude;
   final double longitude;
-  late final String _current;
-  late final String _hourly;
-  late final String _daily;
+  late final List<String> _current;
+  late final List<String> _hourly;
+  late final List<String> _daily;
   late final String _timezone;
 
   Map<String, dynamic> toMap() {

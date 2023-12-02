@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:weather_app/model/core/api_constants.dart';
 
 class AppDio with DioMixin implements Dio {
@@ -13,13 +14,14 @@ class AppDio with DioMixin implements Dio {
 
     this.options = options;
 
-    // interceptors.add(
-    // LogInterceptor(
-    //   requestBody: true,
-    //   responseBody: true,
-    //   responseHeader: false,
-    //   requestHeader: false,
-    // ),
-    // );
+    interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        requestHeader: false,
+      ),
+    );
+    httpClientAdapter = IOHttpClientAdapter();
   }
 }
